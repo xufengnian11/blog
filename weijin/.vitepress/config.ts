@@ -14,9 +14,32 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Examples',
+        collapsed: true,
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
+        ]
+      },
+      {
+        text: 'Vue',
+        collapsed: true,
+        items: [
+          { text: 'Vue3', link: '/vue/vue3' },
+          { text: 'Vue2', link: '/vue/vue2' }
+        ]
+      },
+      {
+        text: 'Vite',
+        collapsed: true,
+        items: [
+          { text: 'Vite', link: '/vite/vite' }
+        ]
+      },
+      {
+        text: 'danger',
+        collapsed: true,
+        items: [
+          { text: 'danger', link: '/danger/danger' }
         ]
       }
     ],
