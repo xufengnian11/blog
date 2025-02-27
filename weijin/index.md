@@ -1,18 +1,21 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-
+# Hero 部分位于主页顶部
 hero:
   name: "WeiJin's blog"
   text: '前端开发之旅'
   tagline: 玲珑骰子安红豆 入骨相思知不知
+  image:
+    src: /logo.JPG
+    alt: 帅逼
   actions:
     - theme: brand
-      text: 一起旅行
+      text: 欣赏沿途风景
       link: /markdown-examples
     - theme: alt
       text: GitHub
-      link: /api-examples
+      link: https://github.com/xufengnian11/blog.git
 
 features:
   - title: Feature A
