@@ -21,6 +21,13 @@ export default defineConfig({
         ]
       },
       {
+        text: 'TypeScript',
+        collapsed: true,
+        items: [
+          { text: 'Ts 初识', link: '/Ts/initial' }
+        ]
+      },
+      {
         text: 'Vue',
         collapsed: true,
         items: [
