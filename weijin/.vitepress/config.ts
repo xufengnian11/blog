@@ -25,7 +25,8 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: '初识 Ts', link: '/Ts/initial' },
-          { text: '细嗦 tsconfig.json', link: '/Ts/tsconfig' }
+          { text: '细嗦 tsconfig.json', link: '/Ts/tsconfig' },
+          { text: '常见类型', link: '/Ts/familiar' }
         ]
       },
       {
