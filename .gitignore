@@ -1,3 +1,5 @@
 node_modules
 weijin/.vitepress/dist
 weijin/.vitepress/cache
+
+.DS_Store
