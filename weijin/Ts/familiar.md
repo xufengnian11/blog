@@ -330,6 +330,20 @@ const inputDom = document.querySelector("input");
 inputDom!.addEventListener("change", e => { 
   console.log((e.target as HTMLInputElement).value);
 })
+
+type Box = {name: string}；
+const getUserInfo = () => {
+	if (Math.radom() > 0.5) {
+    return {name: '魏晋'} as Box
+  }
+  return undefined;
+};
+const creatProduction(box?: Box) {...};
+
+creatProduction(getUserInfo()) // error: Box | underfined 的参数不能赋给类型“Box”的参数
+
+creatProduction(getUserInfo()!) // ✅
+creatProduction(getUserInfo() as Box) // ✅
 ```
 
 ## 可选链操作符
@@ -340,6 +354,7 @@ inputDom!.addEventListener("change", e => {
 
 ```ts
 const userInfo = { name: 'weijin', desc: '大帅哥' };
+userInfo['height'] = '180cm'
 console.log(userInfo?.height) // undefined 但是不会报错 其实应该是 180cm
 ```
 
