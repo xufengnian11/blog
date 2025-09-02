@@ -4,10 +4,10 @@ layout: home
 # Hero 部分位于主页顶部
 hero:
   name: "WeiJin's blog"
-  text: '前端开发之旅'
+  text: "前端开发之旅"
   tagline: 玲珑骰子安红豆 入骨相思知不知
   image:
-    src: /logo.JPG
+    src: "http://atjoss.df0535.cn/diy/super/2025/7/19/1752911840191.jpeg"
     alt: 帅逼
   actions:
     - theme: brand
