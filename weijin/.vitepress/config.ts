@@ -58,6 +58,7 @@ export default defineConfig({
         items: [
           { text: "Prettier", link: "/tool-chain/prettier" },
           { text: "Eslint", link: "/tool-chain/eslint" },
+          { text: "Volta", link: "/tool-chain/volta" },
         ],
       },
       {
