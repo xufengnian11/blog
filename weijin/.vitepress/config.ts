@@ -45,6 +45,7 @@ export default defineConfig({
           { text: "初识 Ts", link: "/ts/initial" },
           { text: "细嗦 tsconfig.json", link: "/ts/tsconfig" },
           { text: "常见类型", link: "/ts/familiar" },
+          { text: "进阶类型", link: "/ts/special" },
         ],
       },
       {

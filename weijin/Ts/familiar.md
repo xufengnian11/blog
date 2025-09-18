@@ -11,15 +11,6 @@ let a: "hello" = "hello";
 let b: 1 = 1;
 ```
 
-## 联合类型
-
-联合类型就是多个类型组合的一个类型，比如：
-
-```ts
-const a: '帅哥' | number | '魏晋' = 1;  ✅
-const b: '帅哥' | number | '魏晋' = ''; ❌
-```
-
 ## 数组类型
 
 数组类型可以通过 “类型[]” 来定义，比如：number[]、string[]...
@@ -126,78 +117,6 @@ function print(): void {
 }
 ```
 
-## 泛型
-
-TypeScript 中的泛型是一种**工具**，它允许在定义函数、接口或者类时提供一个类型变量。这种类型变量可以被视为一种特殊的标记，它允许你在不同的地方使用不同的、具体的类型。泛型提供了一种方式来创建可重用的组件，这些组件可以支持多种类型的数据，同事保持类型的安全性。
-
-```ts
-const a = ref("a");
-function identity<T>(arg: T): T {
-  return arg;
-}
-
-let output = identity<string>("myString"); // output => "string";
-let output1 = identity(a.value); // output => string;
-
-console.log(output, output1); // "myString", "a"
-
-function getTuple<T>(a: T, b: T): [T, T] {
-  return [a, b];
-}
-const tuple = getTuple<string>("a", "b"); // tuple => ["a", "b"]
-console.log(tuple); // ["a", "b"]
-
-// 定义一个函数，传入一个数组和回调函数，返回一个过滤后的数组
-const myNumberFilter = (
-  arr: number[],
-  callback: (item: number, index?: number) => boolean
-) => {
-  const result = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    const item = arr[i];
-    if (callback(item, i)) {
-      result.push(item);
-    }
-  }
-  return result;
-};
-
-const filterArr = myNumberFilter([1, 2, 3, 4], (item) => {
-  return item % 2 === 0;
-});
-console.log(filterArr, "filterArr"); // [2, 4]
-
-// 如何让 myNumberFilter 函数支持多种类型的数组呢？
-function myFilter<T>(
-  arr: T[],
-  callback: (item: T, index?: number) => boolean
-): T[] {
-  const result = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    const item = arr[i];
-    if (callback(item, i)) {
-      result.push(item);
-    }
-  }
-  return result;
-}
-const a = [
-  "xxx.js",
-  "yyy.js",
-  "zzz.js",
-  "xxx.css",
-  "yyy.css",
-  "zzz.css",
-  "xxx.html",
-  "yyy.html",
-  "zzz.html",
-];
-const filterArr = myFilter(a, (item) => {
-  return item.includes(".js");
-});
-console.log(filterArr, "filterArr"); // ['xxx.js', 'yyy.js', 'zzz.js']
-```
-
 ## 对象字面量类型
 
 ```ts
@@ -245,13 +164,13 @@ interface Person {
 }
 
 interface Book {
-	id: number;
+  id: number;
   name: string;
   price?: number;
   // 函数类型的表示方式
   show(id: number): void;
-  filter:(id: number) => void;
-  info: InfoFn
+  filter: (id: number) => void;
+  info: InfoFn;
 }
 
 const obj4: Person = {
@@ -264,97 +183,190 @@ const obj4: Person = {
 有了自定义的类型之后，可以很方便的在函数和数组中使用
 
 ```typescript
-function fn(user: User) {};
+function fn(user: User) {}
 
 const users: User[] = [];
 ```
 
-## 交叉类型
+## 联合类型 `|`
 
-交叉类型是将多个类型合并为一个类型
+有的时候一个值可能是 string 也可能是 number，或者这个类型并不仅仅是一个类型字面量的值。我们希望可以限定是多个值，那这个时候我们该怎么表示呢？
 
 ```ts
-type A = {
-  id: number
-  name: string
-}
-type B = {
-  age: number
-}
-type C = A & B;
-type D = A | B;
+type Width = number | string;
+const width1: Width = 100;
+const width2: Width = "100px";
 
-// 注意类型C与类型D的区别
-/*
-const v5: C = {
-  id: 1,
-  name: "lily",
-  // age: 18, //error 缺少age属性
-}
-*/
-
-const v6: D = {
-  id: 1,
-  name: "lily",
-  // age: 18,
-}
+type Color = "red" | "blue" | "green";
+const color1 = "red"; // ✅
+const color2 = "blue"; // ✅
+const color3 = "black"; // error
 ```
 
-## 类型断言
+同样的，如果是对象类型一样可以
 
-简单来说，TS 会根据上下文进行推测，但是有时候我们可以人为干涉，确定某一个类型
+```ts
+type Student = { name: string; score: number };
+type Teacher = { name: string; age: number; subject: string };
+type Person = Student | Teacher;
 
-类型断言就是告诉 TS 编译器，“I know what I'm doing. If anything goes wrong, I'll take the blame”
-
-这样的话我们能使用更宽松的方式处理类型问题
-
-``` ts
-// 语法	
-// 1、值 as 类型
-// 2、<类型>值
-const a: any = 'weijin';
-const b = (a as string).length; // 推荐
-const c = (<string>a).length; // react 中的 jsx 语法和<类型>值的方式会产生歧义
+const person1: Person = { name: "jack", score: 100 };
+const person2: Person = { name: "jack", age: 18, subject: "math" };
+const person3: Person = { name: "jack", age: 18, subject: "math", score: 100 };
+const person4: Person = { name: "jack" }; // error
 ```
 
-**非空断言**
+由于是联合，从上面的代码中就可以看出，Person 类型可以是 Student 类型的值，也可以是 Teacher 类型的值，甚至两者兼具结构合并之后的值也行。当然，你也不能两个都不是，所以 person4 报错
 
-当你不确定某个值不是 null 或者 undefined 时候，可以直接使用非空断言
+但是使用对象的联合类型很容易让我们产生疑惑。上面的 person1 和 person2 对象都好说，取的是联合，所以我们可以要么是 Student，要么可以是 Teacher。要么其实我们可以两个都是，所以 person3 这样赋值是没有问题的。
 
-``` ts
-// 语法 值!
-const name: undefined | string = 'weijin';
-const name1 = name!; // 如果没有 ！ts 会提示 name 可能是 undefined
+但是要取值的时候就会发生问题
 
-const inputDom = document.querySelector("input");
-inputDom!.addEventListener("change", e => { 
-  console.log((e.target as HTMLInputElement).value);
-})
+```ts
+const person3: Person = { name: "jack", age: 18, subject: "math", score: 100 };
 
-type Box = {name: string}；
-const getUserInfo = () => {
-	if (Math.radom() > 0.5) {
-    return {name: '魏晋'} as Box
-  }
-  return undefined;
+console.log(person3.name);
+console.log(person3.age); // error 类型Person上不存在属性age
+console.log(person3.score); // error 类型Person上不存在属性score
+```
+
+虽然 Student 类型和 Teacher 类型的联合都能赋值给 person3，但是实际在使用的时候 Student 有的属性，Teacher 并不一定有，反过来也一样，因此只能调用两者共同的属性`name`。
+
+> 如果联合类型不相交，那么值只能属于联合类型下的某个成员，不能同时属于每个成员
+
+## 交叉类型 `&`
+
+交叉类型和符号的意思相似，就表示 and 的意思，把`&`相交的组合起来，值需要全部满足相交组合的类型
+
+```ts
+type Width = number | string;
+const width1: Width = 100;
+const width2: Width = "100px";
+
+type Color = "red" | "blue" | "green";
+const color1: Color = "red";
+const color2: Color = "blue";
+const color3: Color = "green";
+```
+
+同样的，如果是对象类型，一样可以
+
+```ts
+type Student = { name: string; score: number };
+type Teacher = { name: string; age: number; subject: string };
+type User = Student & Teacher;
+const user1: User = { name: "jack", age: 18, subject: "math" }; // error 缺少属性"score"
+```
+
+拿上面的类型来说，`A&B` ----> 一说交集应该是，`type C = {name:string}` 才对啊，最后得到的好像是我记忆中数学的联合类型啊？不用对你的记忆怀疑，你的记忆是对的，你可以把锅丢给翻译
+
+为了便于理解，你可以这样想：**C 既符合 A 也符合 B，所以是 A 和 B 的“交叉”**，有了这样的理解，下面出现的一些情况，我们才能更好的理解
+
+相比联合类型，交叉类型的范围就没有那么广泛了，因为你不可能把具体的值使用`&`组合，这样意义也就混乱了
+
+```ts
+type Width = number & string; // never类型
+```
+
+> `number` 和 `string` 没有什么交集，因此根本无法给变量赋值，交叉类型始终交叉的是类型，类型字面量或者基础类型，在做类型交叉的时候没有任何意义，因此得到的结果是 never。
+
+其实，对象字面量类型一样会有这样的效果
+
+```ts
+type P = {
+  name: string;
+  sex: string;
 };
-const creatProduction(box?: Box) {...};
+type T = {
+  name: string;
+  age: number;
+};
+type PT = P & T;
 
-creatProduction(getUserInfo()) // error: Box | underfined 的参数不能赋给类型“Box”的参数
+const a: PT = {
+  name: "jack",
+  sex: "男",
+  age: 11,
+};
+```
 
-creatProduction(getUserInfo()!) // ✅
-creatProduction(getUserInfo() as Box) // ✅
+如果有同名属性，并且类型一样，就会直接合并，但是如果类型不一样呢？
+
+```diff
+type P = {
+  name: string
+  sex: string
+}
+type T = {
++  name: number
+  age:number
+}
+type PT = P & T
+
+const a: PT = {
++  name: 'jack', // error 不能将类型“string”分配给类型“never”
+  sex:'男',
+  age:11
+}
+```
+
+不过我们可以使用交集类型的特性，达到一些我们需要的效果。
+
+比如，我们可能有一个联合类型，在实际开发中，可能这个联合类型我们并不知道有哪些，或者可能这个联合类型直接赋值给另外一个类型的时候会报错，我们可以使用`&`运算符对其进行约束
+
+```ts
+type params = string | number | boolean;
+type pt = params & string;
+```
+
+我们还能使用交叉类型来实现类似于继承的效果
+
+```ts
+type Goods = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+type Cart = Goods & {
+  count: number;
+};
+
+type Order = Goods & {
+  count: number;
+  totalPrice: number;
+};
+
+const goods: Goods = {
+  id: 1,
+  name: "goods",
+  price: 100,
+};
+
+const cart: Cart = {
+  id: 1,
+  name: "goods",
+  price: 100,
+  count: 1,
+};
+
+const order: Order = {
+  id: 1,
+  name: "goods",
+  price: 100,
+  count: 1,
+  totalPrice: 100,
+};
 ```
 
 ## 可选链操作符
 
-注意，可选链操作符是ES2020新的语法特性，并不是TS的新特性
+注意，可选链操作符是 ES2020 新的语法特性，并不是 TS 的新特性
 
 可选链操作符 `?.` 使得我们在尝试访问一个对象的属性或调用一个方法时，如果该对象是 `undefined` 或 `null`，不会引发错误，而是会返回 `undefined`。这样可以避免使用冗长的条件语句来检查对象的每个层级。
 
 ```ts
-const userInfo = { name: 'weijin', desc: '大帅哥' };
-userInfo['height'] = '180cm'
-console.log(userInfo?.height) // undefined 但是不会报错 其实应该是 180cm
+const userInfo = { name: "weijin", desc: "大帅哥" };
+userInfo["height"] = "180cm";
+console.log(userInfo?.height); // undefined 但是不会报错 其实应该是 180cm
 ```
-
