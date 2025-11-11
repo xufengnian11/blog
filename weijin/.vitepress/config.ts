@@ -60,6 +60,7 @@ export default defineConfig({
           { text: "Prettier", link: "/tool-chain/prettier" },
           { text: "Eslint", link: "/tool-chain/eslint" },
           { text: "Volta", link: "/tool-chain/volta" },
+          { text: "Gsap", link: "/tool-chain/gsap" },
         ],
       },
       {
