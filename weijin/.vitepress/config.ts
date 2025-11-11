@@ -9,13 +9,13 @@ export default defineConfig({
       "link",
       {
         rel: "icon",
-        href: "http://atjoss.df0535.cn/diy/super/2025/7/19/1752911840191.jpeg",
+        href: "../public/logo.JPG",
       },
     ],
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: "http://atjoss.df0535.cn/diy/super/2025/7/19/1752911840191.jpeg",
+    logo: "../public/logo.JPG",
     nav: [
       { text: "Home", link: "/" },
       { text: "笔记", link: "/markdown-examples" },

@@ -7,7 +7,7 @@ hero:
   text: "前端开发之旅"
   tagline: 玲珑骰子安红豆 入骨相思知不知
   image:
-    src: "http://atjoss.df0535.cn/diy/super/2025/7/19/1752911840191.jpeg"
+    src: "./public/logo.JPG"
     alt: 帅逼
   actions:
     - theme: brand
