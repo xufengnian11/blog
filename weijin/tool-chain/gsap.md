@@ -1,12 +1,12 @@
-## Gsap
+# Gsap
 
-### 概述
+## 概述
 
 GSAP（GreenSock Animation Platform）是一个功能强大且高性能的 JavaScript 动画库，专门用于创建流畅、复杂和跨浏览器兼容的网页动画。GSAP 广泛应用于网页动画、交互动效、SVG 动画、Canvas 动画等场景，是目前最受欢迎的前端动画库之一。
 
 官网地址：[https://gsap.com/](https://gsap.com/)
 
-###  动画方法
+## 动画方法
 
 ```js
 gsap.to() // 让元素去做
@@ -15,7 +15,7 @@ gsap.fromTo() // 让元素从什么样到什么样
 gsap.set() // 给元素设置一些属性，变化过程无动画
 ```
 
-### 动画配置项
+## 动画配置项
 
 ```js
 // "to" tween - animate to provided values  配置选项
@@ -43,7 +43,7 @@ gsap.to(".selector", { // selector text, Array, or object
 });
 ```
 
-### 控制方法
+## 控制方法
 
 ```js
 // retain animation reference to control later
@@ -67,7 +67,8 @@ anim.play() // plays forward，播放，永远都是正向的播放。
   .invalidate() // clear recorded start/end values，清除开始或者结束的值，在现有状态上重新执行。
   .eventCallback() // get/set an event callback
 
-  // timeline-specific methods，时间线方面的操作，需要时间属性的天才来整。我是牛马系的我不懂。
+  // timeline-specific methods
+  // 时间线方面的操作，需要时间属性的天才来整。我是牛马系的我不懂。
   // add label, tween, timeline, or callback
   .add(thing, position)
   // calls function at given point
@@ -82,7 +83,7 @@ anim.play() // plays forward，播放，永远都是正向的播放。
   .tweenFromTo(from, to, {vars})
 ```
 
-### 实用工具方法
+## 实用工具方法
 
 ```js
 // accessible through gsap.utils.foo()
@@ -93,7 +94,9 @@ checkPrefix() // get relevant browser prefix for property
 	interpolate() // interpolate between values
 	mapRange() // map one range to another
 	normalize() // map a range to the 0-1 range
-	pipe() // sequence function calls，传递任意数量的函数 pipe（）， 它们将按该顺序被调用，每个函数的返回值将传递给下一个函数。
+	pipe() // sequence function calls
+	// 传递任意数量的函数 pipe（）， 它们将按该顺序被调用，每个函数的返回值将传递给下一个函数。
+
 	random() // generates a random value
 	selector() // get a scoped selector function
 	shuffle() // shuffles an array in-place
